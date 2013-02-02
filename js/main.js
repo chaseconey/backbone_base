@@ -26,6 +26,17 @@ var Person = Backbone.Model.extend({
 		age: 0,
 		job: ''
 	},
+
+	//This is run every time a setter is run on this object
+	validate: function(attrs) {
+		if(attrs.age < 0) {
+			return "You cannot be negative years old!";
+		}
+		if( !attrs.name ) {
+			return "You must have a name!";
+		}
+	},
+
 	//NOTICE you don't have any input for this function
 	work: function() {
 		return this.get('name') + " is doing work";

@@ -1,11 +1,28 @@
 Basics
 
+How do we create an object?
+	The same way that we would with simple jquery object, 
+	person1 = new Person();
+
 How do we get object property values?
-You can access these objects with .get('attribute')
+	You can access these objects with .get('attribute')
 
 How do we set though attributes?
-You can set in 2 ways:
-	1. .set('attribute', value);
-		This is typically used for a single setter
-	2. .set({attribute: value});
-		This is usually used when setting multiple attributes at a time
+	You can set in 2 ways:
+		1. .set('attribute', value);
+			This is typically used for a single setter
+		2. .set({attribute: value});
+			This is usually used when setting multiple attributes at a time
+
+
+Validation
+	
+How do we setup validation
+	Model validation is now only enforced by default in Model#save and no longer enforced by default upon construction or in Model#set, unless the {validate:true} option is passed.
+
+	person.set({ age: -100 }, { validate: true });
+
+How do we fetch the errors returned in the validate model?
+	person.on("error", funtion(model, error) {
+		console.log(error);
+	});

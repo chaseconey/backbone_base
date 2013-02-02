@@ -1,0 +1,11 @@
+Basics
+
+How do we get object property values?
+You can access these objects with .get('attribute')
+
+How do we set though attributes?
+You can set in 2 ways:
+	1. .set('attribute', value);
+		This is typically used for a single setter
+	2. .set({attribute: value});
+		This is usually used when setting multiple attributes at a time

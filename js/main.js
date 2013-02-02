@@ -42,3 +42,24 @@ var Person = Backbone.Model.extend({
 		return this.get('name') + " is doing work";
 	}
 });
+
+
+var PersonView = Backbone.View.extend({
+	tagName: "li",
+	//className: "person",
+	//id: "person-id"
+
+	initalize: function() {
+		this.render();
+	},
+
+	render: function() {
+		this.$el.html(this.model.get('name'));
+	}
+});
+
+//Sample creation of Model and View
+person = new Person;
+personView = new PersonView(model: person);
+
+

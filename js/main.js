@@ -49,8 +49,8 @@ var PersonView = Backbone.View.extend({
 	//className: "person",
 	//id: "person-id"
 
-	//Underscore's simple templating engine - we will put it inline for now
-	template: _.template("<%= name %> ( <%= age %> ) - <%= job %>"),
+	//Separating it out a little now, point to the script with selector
+	template: _.template( $("#personTemplate").html() ),
 
 	initialize: function() {
 		this.render();

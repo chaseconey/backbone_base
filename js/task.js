@@ -36,12 +36,14 @@
 		template: template("taskTemplate"),
 
 		events: {
-			"click .edit": "editTask"
+			"click .edit": "editTask",
+			"click .delete": "destroyTask"
 		},
 
 		initialize: function() {
 			//When the model data is changed, update the view
 			this.model.on("change", this.render, this);
+			this.model.on("destroy", this.remove, this);
 		},
 
 		editTask: function() {
@@ -50,6 +52,14 @@
 			if( ! $.trim(newTaskTitle) ) return;
 
 			this.model.set("title", newTaskTitle);
+		},
+
+		destroyTask: function() {
+			this.model.destroy();
+		},
+
+		remove: function() {
+			this.$el.remove();
 		},
 
 		render: function() {

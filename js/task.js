@@ -39,8 +39,17 @@
 			"click .edit": "editTask"
 		},
 
+		initialize: function() {
+			//When the model data is changed, update the view
+			this.model.on("change", this.render, this);
+		},
+
 		editTask: function() {
-			alert("EDITING");
+			var newTaskTitle = prompt("New title?", this.model.get("title"));
+
+			if( ! $.trim(newTaskTitle) ) return;
+
+			this.model.set("title", newTaskTitle);
 		},
 
 		render: function() {

@@ -10,7 +10,11 @@
 		return _.template( $("#" + id).html() );
 	};
 
-	App.Models.Task = Backbone.Model.extend({});
+	App.Models.Task = Backbone.Model.extend({
+		defaults: {
+			priority: 3
+		}
+	});
 
 	App.Collections.Tasks = Backbone.Collection.extend({
 		model: App.Models.Task
@@ -18,6 +22,10 @@
 
 	App.Views.Tasks = Backbone.View.extend({
 		tagName: "ul",
+
+		initialize: function() {
+			this.collection.on('add', this.addOne, this);
+		},
 
 		render: function() {
 			this.collection.each(this.addOne, this);
@@ -69,12 +77,30 @@
 		}
 	});
 
+	App.Views.AddTask = Backbone.View.extend({
+		el: "#addTask",
+
+		events: {
+			"submit": "submit"
+		},
+
+		submit: function(e) {
+			e.preventDefault();
+
+			var newTaskTitle = $(e.currentTarget).find("input[type=text]").val();
+
+			if (! $.trim(newTaskTitle) ) return;
+
+			this.collection.add({title: newTaskTitle});
+		}
+	});
 
 
 
 
 
-	var tasksCollection = new App.Collections.Tasks([
+
+	 var tasksCollection = new App.Collections.Tasks([
 		{
 			title: "This is a task",
 			priority: 1
@@ -88,11 +114,11 @@
 			priority: 3
 		}
 	]);
-
+	var addTaskView = new App.Views.AddTask({ collection: tasksCollection });
 	var tasksView = new App.Views.Tasks({ collection: tasksCollection });
 	tasksView.render();
 	
-	$(document.body).html(tasksView.el);
+	$(".tasks").html(tasksView.el);
 
 
 })();

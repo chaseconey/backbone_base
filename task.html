@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utl-8">
+	<meta charset="utf-8">
 	<title></title>
 </head>
 <body>
+	
+	<h1>My Tasks</h1>
 
-<script id="taskTemplate" type="text/template">
-	<span><%= title %> ( <%= priority %> )</span> <button class="edit">Edit</button> <button class="delete">Delete</button>
-</script>
+	<form id="addTask" action="">
+		<input type="text" placeholder="Add a Task" />
+		<input type="submit" value="Add Task" />
+	</form>
+
+	<div class="tasks">
+		<script id="taskTemplate" type="text/template">
+			<span><%= title %> ( <%= priority %> )</span> <button class="edit">Edit</button> <button class="delete">Delete</button>
+		</script>	
+	</div>
+
 
 <script src="js/underscore.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>

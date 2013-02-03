@@ -47,6 +47,25 @@ var PeopleCollection = Backbone.Collection.extend({
 	model: Person
 });
 
+//We now need a View for the collection
+var PeopleView = Backbone.View.extend({
+	tagName: "ul",
+
+	initialize: function() {
+		//this.render();
+	},
+
+	render: function() {
+		//Here we can pass this as a second parameter to keep the proper scope
+		this.collection.each(function(person){
+			var personView = new PersonView({ model: person });
+			this.$el.append( personView.render().el );
+		}, this);
+
+		return this;
+	}
+});
+
 var PersonView = Backbone.View.extend({
 	tagName: "li",
 	//className: "person",
@@ -55,20 +74,21 @@ var PersonView = Backbone.View.extend({
 	//Separating it out a little now, point to the script with selector
 	template: _.template( $("#personTemplate").html() ),
 
-	initialize: function() {
-		this.render();
-	},
-
 	render: function() {
 		this.$el.html( this.template(this.model.toJSON()) );
+		return this;
 	}
 });
 
 //Sample creation of Model and View
-var person = new Person({name: "Chase Coney", age: 23, job: "Software Developer"});
-var personView = new PersonView({model: person});
-var peopleCollection = new PeopleCollection();
+var peopleCollection = new PeopleCollection(
+	[
+		{name: "Chase Coney", age: 23, job: "Software Developer"},
+		{name: "Sarah Daniels", age: 22, job: "Marketing Manager"},
+		{name: "Murphy Judge Joe Brown", age: 65, job: "Garbage Man"}
+	]
+);
+var peopleView = new PeopleView({ collection: peopleCollection });
 
-peopleCollection.add(person);
-
+$(document.body).append(peopleView.render().el);
 

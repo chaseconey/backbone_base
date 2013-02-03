@@ -49,17 +49,20 @@ var PersonView = Backbone.View.extend({
 	//className: "person",
 	//id: "person-id"
 
-	initalize: function() {
+	//Underscore's simple templating engine - we will put it inline for now
+	template: _.template("<%= name %> ( <%= age %> ) - <%= job %>"),
+
+	initialize: function() {
 		this.render();
 	},
 
 	render: function() {
-		this.$el.html(this.model.get('name'));
+		this.$el.html( this.template(this.model.toJSON()) );
 	}
 });
 
 //Sample creation of Model and View
-person = new Person;
-personView = new PersonView(model: person);
+var person = new Person({name: "Chase Coney", age: 23, job: "Software Developer"});
+var personView = new PersonView({model: person});
 
 

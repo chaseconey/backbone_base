@@ -43,6 +43,9 @@ var Person = Backbone.Model.extend({
 	}
 });
 
+var PeopleCollection = Backbone.Collection.extend({
+	model: Person
+});
 
 var PersonView = Backbone.View.extend({
 	tagName: "li",
@@ -64,5 +67,8 @@ var PersonView = Backbone.View.extend({
 //Sample creation of Model and View
 var person = new Person({name: "Chase Coney", age: 23, job: "Software Developer"});
 var personView = new PersonView({model: person});
+var peopleCollection = new PeopleCollection();
+
+peopleCollection.add(person);
 
 

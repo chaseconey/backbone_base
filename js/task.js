@@ -14,15 +14,25 @@
 	App.Router = Backbone.Router.extend({
 		routes: {
 			"": "index",
-			"show": "show"
+			"show/:id": "show",
+			"download/*filename": "download",
+			"*action": "default"
+		},
+
+		default: function(action) {
+			console.log(action + " is unrecognized!");
 		},
 
 		index: function() {
 			console.log("INDEX");
 		},
 
-		show: function() {
-			console.log("SHOW THIS SHZ");
+		show: function(id) {
+			console.log("You passed an id of: " + id);
+		},
+
+		download: function(filename) {
+			console.log("Filename of: " + filename);
 		}
 	});
 

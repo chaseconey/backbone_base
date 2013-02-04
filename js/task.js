@@ -3,12 +3,28 @@
 	window.App = {
 		Models: {},
 		Views: {},
-		Collections: {}
+		Collections: {},
+		Router: {}
 	};
 
 	window.template = function(id) {
 		return _.template( $("#" + id).html() );
 	};
+
+	App.Router = Backbone.Router.extend({
+		routes: {
+			"": "index",
+			"show": "show"
+		},
+
+		index: function() {
+			console.log("INDEX");
+		},
+
+		show: function() {
+			console.log("SHOW THIS SHZ");
+		}
+	});
 
 	App.Models.Task = Backbone.Model.extend({
 		defaults: {
@@ -119,6 +135,9 @@
 	tasksView.render();
 	
 	$(".tasks").html(tasksView.el);
+
+	new App.Router;
+	Backbone.history.start();
 
 
 })();

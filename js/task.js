@@ -16,10 +16,10 @@
 			"": "index",
 			"show/:id": "show",
 			"download/*filename": "download",
-			"*action": "default"
+			"*action": "defaultAction"
 		},
 
-		default: function(action) {
+		defaultAction: function(action) {
 			console.log(action + " is unrecognized!");
 		},
 
